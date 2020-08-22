@@ -8,8 +8,6 @@ function handleSubmit(event) {
     console.log(formText);
 
     console.log("::: Form Submitted :::");
-    // postData('/userData', {input: formText});
-
         
     fetch('/userData', {
         method: 'POST',
@@ -24,26 +22,8 @@ function handleSubmit(event) {
     .then(function(res) {
         // console.log(res.json());
         console.log("Client", res);
-        document.getElementById('results').innerHTML = res.input;
+        document.getElementById('results').innerHTML = `${res.score_tag} <br> ${res.irony}`;
     })
-}
-
-const postData = async(url = '', data = {}) => {
-    const response = await fetch(url, {
-        method: 'POST',
-        credentials: 'same-origin',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    });
-    try {
-        const newData = await response.json();
-        return newData;
-
-    } catch(error) {
-        console.log("Error", error);
-    }
 }
 
 export { handleSubmit };

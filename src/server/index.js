@@ -3,15 +3,12 @@ dotenv.config();
 
 var path = require('path');
 const express = require('express');
-// const mockAPIResponse = require('./mockAPI.js');
+const fetch = require("node-fetch");
 var bodyParser = require('body-parser');
 var cors = require('cors');
-const cloudApi = process.env.API_KEY;
-let userData = {};
-let userText;
-// const apiEndpoint = 'https://api.meaningcloud.com/sentiment-2.1';
+var validator = require('validator');
 const app = express();
-
+let reqType = 'txt';
 
 // console.log(__dirname)
 app.use(cors())
@@ -31,24 +28,17 @@ app.listen(3000, function () {
     console.log('Example app listening on port 8081!');
 })
 
-// app.get('/test', function (req, res) {
-//     console.log(mockAPIResponse);
-// })
+app.post('/userData', async(req, res) => {
+    // check if user input is url, text is default
+    if (validator.isURL(req.body.input)) {
+        reqType = 'url';
+    }
 
-app.post('/userData', function(req, res) {
-    userData = req.body;
-    userText = req.body.input;
-    res.send(userData);
-
+    const response = await fetch(`https://api.meaningcloud.com/sentiment-2.1?key=${process.env.API_KEY}&lang=auto&${reqType}=${req.body.input}`);  
+    try {
+        const data = await response.json();
+        res.send(data);
+    } catch(error) {
+        console.log("error", error);
+    }
 });
-
-// const analyzeText = async(inputText) => {
-//     const response = await fetch(`https://api.meaningcloud.com/sentiment-2.1?key=${process.env.API_KEY}&lang=auto&txt=${inputText}`);
-//     try {
-//         const data = await response.json();
-//         console.log("TEST", data);
-//         return data;
-//     } catch(error) {
-//         console.log("Error", error);
-//     }
-// }
