@@ -35,6 +35,14 @@
         <footer>
             <p>Created by Eline Jacobse for <a href="https://www.udacity.com/course/front-end-web-developer-nanodegree--nd0011">Udacity</a></p>
         </footer>
-
+        <script>
+            // Check that service workers are supported
+            if ('serviceWorker' in navigator) {
+                // Use the window load event to keep the page load performant
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('/service-worker.js');
+                });
+            }
+        </script>
     </body>
 </html>
