@@ -10,6 +10,7 @@ function analyzeText(formText) {
     fetch('/userData', {
         method: 'POST',
         credentials: 'same-origin',
+        mode: 'cors',
         headers: {
             'Content-Type': 'application/json'
         },
@@ -20,7 +21,17 @@ function analyzeText(formText) {
 }
 
 function updateUI(content) {
-    document.getElementById('results').innerHTML = `${content.score_tag} <br> ${content.irony}`;
+    let element = document.getElementById('results');
+    if(content.confidence === undefined) {
+        element.innerHTML = "Couldn't analyze text, please try again."
+    }
+    else {
+        element.innerHTML = 
+        `<strong>Confidence: </strong>${content.confidence}<br>
+        <strong>Score tag: </strong>${content.score_tag}<br>
+        <strong>Subjectivity: </strong>${content.subjectivity}<br>
+        <strong>Irony: </strong>${content.irony}`; 
+    }
 }
 export { handleSubmit };
 export { analyzeText };

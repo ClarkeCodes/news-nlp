@@ -6,9 +6,15 @@ const { JSDOM } = jsdom;
 describe("Testing the submit functionality", () => {
     test('Checking if UI is updated properly with results of API call', () => {
         const dom = new JSDOM(`<div id="results"></div>`);
-        const content = { score_tag: "P", irony: "NONIRONIC" };
+        const content = { confidence: "100",score_tag: "P", subjectivity: "SUBJECTIVE", irony: "NONIRONIC" };
         const element = dom.window.document.getElementById('results');
+        
         updateUI(content);
-        expect(element.innerHTML).toBe('P <br> NONIRONIC');
+        expect(element.innerHTML).toBe(`
+            <strong>Confidence: </strong>100<br>
+            <strong>Score tag: </strong>P<br>
+            <strong>Subjectivity: </strong>SUBJECTIVE<br>
+            <strong>Irony: </strong>NONIRONIC</div>`
+        );
     });
 });
