@@ -1,9 +1,8 @@
 function handleSubmit(event) {
     event.preventDefault();
 
+    // get text that user submitted
     let formText = document.getElementById('name').value;
-
-    console.log("::: Form Submitted :::");
     analyzeText(formText);
 }
 
@@ -17,9 +16,7 @@ function analyzeText(formText) {
         body: JSON.stringify({ input: formText })
     })
     .then(res => res.json())
-    .then(function(res) { updateUI(res)
-        // document.getElementById('results').innerHTML = `${res.score_tag} <br> ${res.irony}`;
-    })
+    .then(function(res) { updateUI(res) })
 }
 
 function updateUI(content) {
