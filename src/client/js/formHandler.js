@@ -17,22 +17,11 @@ function analyzeText(formText) {
         body: JSON.stringify({ input: formText })
     })
     .then(res => res.json())
-    .then(function(res) { updateUI(res) })
+    .then(function(res) {
+        let element = document.getElementById('results');
+        Client.updateUI(element, res);
+    })
 }
 
-function updateUI(content) {
-    let element = document.getElementById('results');
-    if(content.confidence === undefined) {
-        element.innerHTML = "Couldn't analyze text, please try again."
-    }
-    else {
-        element.innerHTML = 
-        `<strong>Confidence: </strong>${content.confidence}<br>
-        <strong>Score tag: </strong>${content.score_tag}<br>
-        <strong>Subjectivity: </strong>${content.subjectivity}<br>
-        <strong>Irony: </strong>${content.irony}`; 
-    }
-}
 export { handleSubmit };
 export { analyzeText };
-export { updateUI };

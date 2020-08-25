@@ -1,6 +1,6 @@
 import { handleSubmit } from './js/formHandler';
 import { analyzeText } from './js/formHandler';
-import { updateUI } from './js/formHandler';
+import { updateUI } from './js/updateUI';
 
 import './styles/resets.scss';
 import './styles/base.scss';
