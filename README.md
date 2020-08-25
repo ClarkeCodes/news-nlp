@@ -48,12 +48,14 @@ This will create a `dist` folder with the built code. The production server runs
 
 Now the app should be all set and ready to use. You can enter your own text into the form to analyze it, or enter a URL to an article of blog post instead. 
 
-## Preview
+For more information on the results of the text analysis, check out the [MeaningCloud API documentation](https://www.meaningcloud.com/developer/sentiment-analysis/doc/2.1/response).
+
+## Preview 
+
+![A screenshot of the website](preview.png)
 
 
-
-
-## Credits & Libraries used
+## Credits
 - [Validator](https://www.npmjs.com/package/validator) for checking if string is URL or plain text
 - [MeaningCloud Sentiment Analysis](https://www.meaningcloud.com/developer/sentiment-analysis)
-- [JSDOM](https://github.com/jsdom/jsdom)
+- [JSDOM](https://github.com/jsdom/jsdom) used for running tests in Jest 
